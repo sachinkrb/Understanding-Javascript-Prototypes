@@ -1,5 +1,7 @@
 Enjoy learning new things. Can spent hours doing research to solve an issue. Like brainstorming things that seems tedious.
 
+WHAT I UNDERSTOOD:
+
 You can understand word 'prototype' literally as 'DAD'.
 
 If John's prototype is person then it means person is dad of John. John inherits properties of DAD.
