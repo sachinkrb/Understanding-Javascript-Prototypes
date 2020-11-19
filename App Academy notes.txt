@@ -1,0 +1,48 @@
+* Try these on stringName instead of arrayName. Is STRING just a special ARRAY itself? => arrayName.push() arrayName.pop() arrayName.shift() arrayName.unshift() arrayName.index() arrayName.include?() arrayName.reverse arrayName.reverse! arrayName[0..3] arrayName[3..-1] arrayName[-2] 
+* Only to use on stringName but not on arrayName => stringName.split() => converts into array => split removes and splits the string into array.
+* Convert from array to string => arrayName.join()
+* Try combining multiple methods together such as stringName.split().join()
+
+Enumerable methods
+-------------------------
+
+arrayName.each { |ele| puts ele}   #(replaces the while loop)({ } replaced by do and end)
+OR
+arrayName.each do |ele|  puts ele  end
+
+arrayName.each_with_index  do |ele, idx| end
+
+stringName.each_char do |char| end
+
+stringName.each_char.with_index do |char, idx| end
+
+(startvar..endvar).each { |num| puts num } 
+
+(startvar...endvar).each { |num| puts num }
+
+(starvar..endvar).each { puts "string" } #prints string Y times
+
+number.times { puts "string"} #print string number times
+
+number.to_s # change number to string
+
+* Once the ruby intrepreter touches return, its gonna exit out of def (function) and returns the value of the caller. Won't go down further inside def.
+* As soon as you use 'each', the passed element in the 'array' turns into 'string' right away so it can be accessed as ele[0] ele[0..-1] and so on( each char can be indexed).
+* 'each' is beneficial when playing with arrays and turning its elements  to strings while still maintaining index for each elements.
+* Adding array in pairs on an  array can be done as arr <<[a,b,c]<<[1,2] which will result in [[a,b,c], [1,2]]
+* 'each' can be repeated on second line to extract the inner elements of the array. #array.each do |subarray|  #subarray.each do |ele|
+* num.times { } cab b used as arr[1].times {finarr << subarr[0]} multiplies subarr[0] arr[1] times and shoves into finarr
+
+HASHES
+-----------------------
+oject.length
+object.has_key?(key)
+object.has_value?(value)
+object.keys
+object.values
+object.each do |k v|
+object.each do |k|
+object.each do |v|
+myhash = Hash.new("hello") - default value for any key with nil value
+count.sort_by {|k, v| v}
+

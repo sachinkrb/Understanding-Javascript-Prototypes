@@ -1,0 +1,224 @@
+Enjoy learning new things. Can spent hours doing research to solve an issue. Like brainstorming things that seems tedious.
+
+You can understand word 'prototype' literally as 'DAD'.
+
+If John's prototype is person then it means person is dad of John. John inherits properties of DAD.
+
+var alien = { kind : 'alien1'}; var person = {kind : 'person1'}; var zack = {}; zack.__proto__ = alien; console.log(zack.kind);
+alien1 debugger eval code:1:113
+undefined
+console.log(zack)
+{}
+​
+<prototype>: {…}
+​​
+kind: "alien1"
+​​
+<prototype>: Object { … }
+debugger eval code:1:9
+undefined
+zack.__proto__ = person; console.log(person.kind);
+person1 debugger eval code:1:34
+undefined
+console.log(zack)
+{}
+​
+<prototype>: {…}
+​​
+kind: "person1"
+​​
+<prototype>: Object { … }
+debugger eval code:1:9
+undefined
+console.log(person.isPrototypeOf(zack));
+true debugger eval code:1:9
+undefined
+console.log(zack.isPrototypeOf(person));
+false debugger eval code:1:9
+undefined
+console.log(alien.idPrototypeOf(zack));
+TypeError: alien.idPrototypeOf is not a function debugger eval code:1:19
+console.log(alien.isPrototypeOf(zack));
+false debugger eval code:1:9
+undefined
+
+What happens if you update a property that already exists in the prototype? 
+New / updated properties are assigned to the object, not to the prototype.
+Note that the property ‘kind’ now exists in both person and zack.
+
+var person = {
+  kind: 'person1'
+}
+var zack ={}
+zack.__proto__ = person
+zack.kind = 'zack1'
+console.log(zack.kind);
+console.log(person.kind);
+zack1 debugger eval code:7:9
+person1 debugger eval code:8:9
+undefined
+console.log(zack)
+{…}
+​
+kind: "zack1"
+​
+<prototype>: {…}
+​​
+kind: "person1"
+​​
+<prototype>: {…}
+​​​
+__defineGetter__: function __defineGetter__()
+​​​
+__defineSetter__: function __defineSetter__()
+​​​
+__lookupGetter__: function __lookupGetter__()
+​​​
+__lookupSetter__: function __lookupSetter__()
+​​​
+__proto__: 
+​​​
+constructor: function Object()
+​​​
+hasOwnProperty: function hasOwnProperty()
+​​​
+isPrototypeOf: function isPrototypeOf()
+​​​
+propertyIsEnumerable: function propertyIsEnumerable()
+​​​
+toLocaleString: function toLocaleString()
+​​​
+toSource: function toSource()
+​​​
+toString: function toString()
+​​​
+valueOf: function valueOf()
+​​​
+<get __proto__()>: function __proto__()
+​​​
+<set __proto__()>: function __proto__()
+debugger eval code:1:9
+undefined
+console.log(person)
+{…}
+​
+kind: "person1"
+​
+<prototype>: {…}
+​​
+__defineGetter__: function __defineGetter__()
+​​
+__defineSetter__: function __defineSetter__()
+​​
+__lookupGetter__: function __lookupGetter__()
+​​
+__lookupSetter__: function __lookupSetter__()
+​​
+__proto__: 
+​​
+constructor: function Object()
+​​
+hasOwnProperty: function hasOwnProperty()
+​​
+isPrototypeOf: function isPrototypeOf()
+​​
+propertyIsEnumerable: function propertyIsEnumerable()
+​​
+toLocaleString: function toLocaleString()
+​​
+toSource: function toSource()
+​​
+toString: function toString()
+​​
+valueOf: function valueOf()
+​​
+<get __proto__()>: function __proto__()
+​​
+<set __proto__()>: function __proto__()
+debugger eval code:1:9
+undefined
+
+ __proto__ is not a well supported way of assigning prototypes to objects. So the next simplest way is using Object.create().
+
+var person = {
+kind: 'person'
+}
+var zack = Object.create(person); //Create object called zack for person protoype.
+console.log(zack.kind);
+person debugger eval code:5:9
+undefined
+
+https://tylermcginnis.com/var-let-const/
+Local scope can be divided into function scope and block scope. The concept of block scope is introduced in ECMA script 6 (ES6) together with the new ways to declare variables -- const and let. 
+
+Scope defines where variables and functions are accessible inside of your program. In JavaScript, there are two kinds of scope - global scope, and function scope. According to the official spec,
+
+    “If the variable statement occurs inside a FunctionDeclaration, the variables are defined with function-local scope in that function.”.
+
+What that means is if you create a variable with var, that variable is “scoped” to the function it was created in and is only accessible inside of that function or, any nested functions. 
+
+function discountPrices (prices, discount) {
+  var discounted = []
+
+  for (var i = 0; i < prices.length; i++) {
+    var discountedPrice = prices[i] * (1 - discount)
+    var finalPrice = Math.round(discountedPrice * 100) / 100
+    discounted.push(finalPrice)
+  }
+
+  console.log(i) // 3
+  console.log(discountedPrice) // 150
+  console.log(finalPrice) // 150
+
+  return discounted
+}
+discountPrices1 = discountPrices([100, 200, 300], .5);
+console.log(discountPrices1);
+3 debugger eval code:10:11
+150 debugger eval code:11:11
+150 debugger eval code:12:11
+(3) […]
+​
+0: 50
+​
+1: 100
+​
+2: 150
+​
+length: 3
+​
+<prototype>: Array []
+debugger eval code:17:9
+undefined
+
+var x = 'foo';
+console.log(x);         //foo
+console.log(y);         //undefined, no errors!!
+var y = 'late foo';     //late foo 
+console.log(y);
+
+foo debugger eval code:2:9
+undefined debugger eval code:3:9
+late foo debugger eval code:5:9
+undefined
+-------------------------------------------------
+Every JavaScript function is actually a Function object. This can be seen with the code (function(){}).constructor === Function which returns true.
+
+It's important to understand that there is a distinction between an object's prototype (which is available via Object.getPrototypeOf(obj), or via the deprecated __proto__ property) and the prototype property on constructor functions. The former is the property on each instance, and the latter is the property on the constructor. That is, Object.getPrototypeOf(new Foobar()) refers to the same object as Foobar.prototype.
+the inherited ones are the ones defined on the prototype property (you could call it a sub-namespace) — that is, the ones that begin with Object.prototype., and not the ones that begin with just Object. The prototype property's value is an object, which is basically a bucket for storing properties and methods that we want to be inherited by objects further down the prototype chain.
+
+So Object.prototype.toString(), Object.prototype.valueOf(), etc., are available to any object types that inherit from Object.prototype, including new object instances created from the Person() constructor.
+Object.is(), Object.keys(), and other members not defined inside the prototype bucket are not inherited by object instances or object types that inherit from Object.prototype. They are methods/properties available just on the Object() constructor itself.
+This seems strange — how can you have a method defined on a constructor, which is itself a function? Well, a function is also a type of object — see the Function() constructor reference if you don't believe us.
+
+Earlier on we showed how the Object.create() method can be used to create a new object instance.
+
+    For example, try this in your previous example's JavaScript console:
+
+    const person2 = Object.create(person1);
+
+What create() actually does is to create a new object from a specified prototype object. Here, person2 is being created using person1 as a prototype object. You can check this by entering the following in the console:
+
+person2.__proto__
+
+This will return the person1 object.
